@@ -1,15 +1,23 @@
 import React,{Component} from 'react';
+import PropTypes from 'prop-types';
 
 export default class Formulario extends Component {
 
+    categoriaRef = React.createRef();
+
+    cambiarCategoria = (e) => {
+        e.preventDefault();
+        //trae la consulta de App y este prop es que se valida con propTypes
+        this.props.consultarNoticias(this.categoriaRef.current.value);
+    }
     render() {
         return (
             <div className="buscador row">
                 <div className="col s12 m8 offset-m2">
-                    <form>
+                    <form onSubmit={this.cambiarCategoria}>
                         <h2>Noticias por Categoria</h2>
                         <div className="input-field col s12 m8">
-                            <select>
+                            <select ref = {this.categoriaRef}>
                                 <option value="general" defaultValue>
                                         General
                                 </option>
@@ -41,4 +49,7 @@ export default class Formulario extends Component {
             </div>
         );
     }
+}
+Formulario.propTypes = {
+ consultarNoticias : PropTypes.func.isRequired
 }

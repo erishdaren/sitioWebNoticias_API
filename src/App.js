@@ -10,9 +10,12 @@ export default class App extends Component {
   componentDidMount() {
     this.consultarNoticias();
   }
-  consultarNoticias = () => {
+  consultarNoticias = (categoria='general') => {
+    
+    console.log(categoria);
+    
       //const url = `https://newsapi.org/v2/top-headlines? country = mx & apiKey = 65b0783607704b2ca764074365487cb9`;
-      const url = `https://newsapi.org/v2/top-headlines?country=mx&category=general&apiKey=65b0783607704b2ca764074365487cb9`;
+      const url = `https://newsapi.org/v2/top-headlines?country=mx&category=${categoria}&apiKey=65b0783607704b2ca764074365487cb9`;
       fetch(url)
       .then(respuesta => {
         return respuesta.json();
@@ -31,7 +34,9 @@ export default class App extends Component {
                       titulo = "Sitio Web de Noticias" 
                   />
                  <div className="container white contenedor-noticias">
-                      <Formulario />
+                      <Formulario 
+                          consultarNoticias = {this.consultarNoticias}                      
+                      />
                       <Noticias 
                           noticias= {this.state.noticias}
                       />
@@ -40,6 +45,5 @@ export default class App extends Component {
         );
     }
 }
-
 
 
