@@ -1,13 +1,12 @@
 import React,{Component} from 'react';
 import Header from './components/Header';
+import Noticias from './components/Noticias';
+import Formulario from './components/Formulario';
 
-export default class Class extends Component {
-state = {
-  noticias : []
-}
-
-
-
+export default class App extends Component {
+    state = {
+      noticias : []
+    }
   componentDidMount() {
     this.consultarNoticias();
   }
@@ -24,10 +23,19 @@ state = {
         })
       })
   }
+  //inicio el JSX
     render() {
         return (
-            <div className="class-name">
-                 <Header titulo = "Sitio Web de Noticias" />
+            <div className="contenedor-app">
+                 <Header 
+                      titulo = "Sitio Web de Noticias" 
+                  />
+                 <div className="container white contenedor-noticias">
+                      <Formulario />
+                      <Noticias 
+                          noticias= {this.state.noticias}
+                      />
+                 </div>
             </div>
         );
     }
